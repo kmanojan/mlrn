@@ -1,0 +1,40 @@
+<style>
+    .progress {
+        width: 100%;
+        background-color: #f5f5f5;
+        height: 20px;
+    }
+    .progress-bar {
+        height: 100%;
+        background-color: #007bff;
+        transition: width 0.2s ease;
+    }
+</style>
+<script>
+    const { ipcRenderer } = require('electron');
+  
+    ipcRenderer.on('message', (event, text) => {
+      // Update the UI here. For example, update a progress bar
+      const progressBar = document.getElementById('progress-bar');
+      const statusText = document.getElementById('status-text');
+  
+      if (text.includes('Download speed')) {
+        let percent = parseFloat(text.match(/(\d+)%/)[1]);
+        progressBar.style.width = percent + '%';
+        statusText.textContent = text;
+      } else {
+        statusText.textContent = text;
+      }
+    });
+  
+    // When the window is loaded, check for updates
+    window.onload = () => {
+      ipcRenderer.send('check-for-updates');
+    };
+  </script>
+  
+  <!-- HTML for progress bar -->
+  <div id="status-text"></div>
+  <div class="progress">
+    <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>

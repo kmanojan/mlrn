@@ -1,0 +1,46 @@
+{
+  "name": "mlrn-electron",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-builder",
+    "publish": "electron-builder --win -p always"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kmanojan/mlrn.git",
+    "release": "latest"
+  },
+  "build": {
+    "appId": "com.yourapp.id",
+    "productName": "Mlrn",
+    "protocols": {
+      "name": "electron-deep-linking",
+      "schemes": [
+        "mouradesktop"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "kmanojan",
+        "repo": "mlrn",
+        "token": "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",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  }
+}
